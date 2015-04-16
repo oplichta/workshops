@@ -38,7 +38,9 @@ describe ProductsController do
     let(:product) { Product.create! valid_attributes }
 
     before do
-      sign_in user2
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      user2 = FactoryGirl.create(:user)
+      sign_in :user, user2
       controller.stub(:user_signed_in?).and_return(true)
       controller.stub(:current_user).and_return(user2)
       controller.stub(:authenticate_user!).and_return(user2)
@@ -118,7 +120,9 @@ describe ProductsController do
         let(:product) { Product.create! valid_attributes }
 
         before do
-          sign_in user
+          @request.env["devise.mapping"] = Devise.mappings[:user]
+          user = FactoryGirl.create(:user)
+          sign_in :user, user
           controller.stub(:user_signed_in?).and_return(true)
           controller.stub(:current_user).and_return(user)
           controller.stub(:authenticate_user!).and_return(user)
@@ -166,7 +170,9 @@ describe ProductsController do
       let(:product) { Product.create! valid_attributes }
 
       before do
-        sign_in user
+        @request.env["devise.mapping"] = Devise.mappings[:user]
+        user = FactoryGirl.create(:user)
+        sign_in :user, user
         controller.stub(:user_signed_in?).and_return(true)
         controller.stub(:current_user).and_return(user)
         controller.stub(:authenticate_user!).and_return(user)
@@ -214,7 +220,9 @@ describe ProductsController do
 
     context 'user is signed in' do
       before do
-        sign_in user
+        @request.env["devise.mapping"] = Devise.mappings[:user]
+        user = FactoryGirl.create(:user)
+        sign_in :user, user
         controller.stub(:user_signed_in?).and_return(true)
         controller.stub(:current_user).and_return(user)
         controller.stub(:authenticate_user!).and_return(user)
