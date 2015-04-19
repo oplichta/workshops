@@ -1,0 +1,9 @@
+%h1 User profile
+= simple_form_for(@user, url: user_path(current_user.id)) do |f|
+  .form-input
+    = f.input :firstname
+    = f.input :lastname
+    = f.input :email
+
+  %p Reviews
+  = render reviews

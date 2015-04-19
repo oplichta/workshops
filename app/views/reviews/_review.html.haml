@@ -1,4 +1,8 @@
 %p= review.content
 %p
-  %b= review.rating
+  %b Rating
+  = review.rating
+  %b Author
   %em= review.author
+  %b Date
+  = review.created_at
